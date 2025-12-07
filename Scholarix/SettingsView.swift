@@ -4,9 +4,6 @@ import FirebaseAuth
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     
-    // CHANGED: Binding ensures the parent (AcademicView) updates instantly
-    @Binding var isDarkMode: Bool
-    
     @AppStorage("notificationsEnabled") private var notificationsEnabled = false
     @State private var showingSignOutAlert = false
     
@@ -65,16 +62,7 @@ struct SettingsView: View {
                 }
                 .disabled(true)
                 
-                // Dark Mode: Functional via Binding
-                Toggle(isOn: $isDarkMode) {
-                    Label {
-                        Text("Dark Mode")
-                            .font(.system(.body, design: .rounded))
-                    } icon: {
-                        Image(systemName: "moon.fill")
-                            .foregroundColor(.indigo)
-                    }
-                }
+                // Dark Mode is now handled by the system
             }
             .listRowBackground(Color(.secondarySystemGroupedBackground))
             
@@ -140,3 +128,4 @@ struct SettingsView: View {
         }
     }
 }
+

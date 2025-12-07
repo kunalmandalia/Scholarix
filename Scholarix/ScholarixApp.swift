@@ -17,30 +17,13 @@ struct ScholarixApp: App {
     // for the entire time the app is running.
     @StateObject private var sessionManager = SessionManager()
     
-    // Watch the stored theme setting from UserDefaults
-    @AppStorage("appTheme") private var appTheme: String = "system"
+    // Using system theme by default
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 // Inject the SessionManager into the environment
                 .environmentObject(sessionManager)
-                // Apply the animation to the CONTENT changes (colors, backgrounds)
-                .animation(.easeInOut(duration: 0.8), value: appTheme)
-                // Force the color scheme based on the user's setting
-                .preferredColorScheme(selectedScheme)
-        }
-    }
-    
-    // Helper to convert the string setting to a SwiftUI ColorScheme
-    var selectedScheme: ColorScheme? {
-        switch appTheme {
-        case "light":
-            return .light
-        case "dark":
-            return .dark
-        default:
-            return nil // This means "System Default"
         }
     }
 }
